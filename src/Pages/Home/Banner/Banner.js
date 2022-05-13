@@ -1,9 +1,10 @@
 import React from "react";
 import chair from '../../../assets/images/chair.png';
+import bg from '../../../assets/images/bg.png'
 
 const Banner = () => {
   return (
-    <div className="w-full h-full bg-no-repeat bg-cover" style={{backgroundImage: "url('https://i.ibb.co/ZGnbGLD/bg.png')"}}>
+    <div className="w-full h-full bg-no-repeat bg-cover" style={{backgroundImage: `url(${bg})`}}>
       <div class="hero min-h-screen">
         <div class="hero-content flex-col lg:flex-row-reverse">
           <img
