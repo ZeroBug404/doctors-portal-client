@@ -5,7 +5,7 @@ import BookingModal from './BookingModal';
 
 const AvilableAppointments = ({date}) => {
     const [appointments, setAppointments] = useState([]);
-    const [treatment, setTreatment] = useState({});
+    const [treatment, setTreatment] = useState(null);
 
     useEffect(() => {
         fetch('appointments.json')
@@ -24,7 +24,7 @@ const AvilableAppointments = ({date}) => {
                         setTreatment={setTreatment}
                     ></Appointmentinfo>)
                 }
-                {treatment && <BookingModal date={date} treatment={treatment}></BookingModal>}
+                {treatment && <BookingModal setTreatment={setTreatment} date={date} treatment={treatment}></BookingModal>}
             </div>
         </div>
     );

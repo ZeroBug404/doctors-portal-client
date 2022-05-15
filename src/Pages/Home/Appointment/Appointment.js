@@ -23,7 +23,7 @@ const Appointment = () => {
             here', making it look like readable English. Many desktop publishing
             packages and web page
           </p>
-          <button class="btn btn-primary text-white">Get Started</button>
+          <button className="btn btn-primary text-white">Get Started</button>
         </div>
       </div>
     </section>
