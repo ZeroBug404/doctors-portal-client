@@ -1,18 +1,54 @@
+/* eslint-disable no-unused-vars */
 import { format } from "date-fns";
-import React from "react";
+import React, { useRef } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 
-const BookingModal = ({ date, treatment, setTreatment }) => {
+const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
   const [user, loading, error] = useAuthState(auth);
-  const { name, slots } = treatment;
+  const { _id, name, slots } = treatment;
+  const slotRef = useRef()
 
+  const formattedDate = format(date, "PP")
   const handleBookAppointment = (e) => {
     e.preventDefault();
+    const slot = slotRef.current.value; 
 
+    const bookingInfo = {
+      treatmentId: _id,
+      treatmentName: name,
+      date: formattedDate,
+      slot,
+      patientEmail: user.email,
+      patientName: user.displayName,
+      phone: e.target.phone.value
+    }
+
+    fetch('http://localhost:5000/booking',{
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(bookingInfo)
+    })
+    .then(res => res.json())
+    .then(data => {
+
+      console.log(data);
+      if (data.success) {
+        toast(`Your Appointment is placed, on ${formattedDate} at ${slot}`)
+      }
+      else{
+        toast.error (`Already have an appointment, on ${data.booking?.date} at ${data.booking?.slot}`)
+      }
+    })
+
+    refetch();
     //to close the modal
     setTreatment(null);
   };
+
   return (
     <div>
       <input type="checkbox" id="booking-modal" className="modal-toggle" />
@@ -40,6 +76,8 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
               {slots?.map((slot, index) => (
                 <option 
                 key={index}
+                value={slot}
+                ref={slotRef}
                 >{slot}</option>
               ))}
             </select>
