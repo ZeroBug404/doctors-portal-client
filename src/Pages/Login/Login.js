@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle
@@ -7,6 +7,7 @@ import {
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import useToken from "../Hooks/useToken";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -22,6 +23,8 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  const [token] = useToken(user || gUser)
 
   if (loading || gLoading) {
     return (
@@ -42,9 +45,11 @@ const Login = () => {
   };
 
   let from = location.state?.from?.pathname || "/";
-  if(gUser || user){
+
+  if(token){
     navigate(from, { replace: true });
   }
+
   return (
     <div className="flex h-screen justify-center items-center">
       <div className="card w-96 bg-base-100 shadow-xl">

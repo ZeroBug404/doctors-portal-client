@@ -1,16 +1,33 @@
 /* eslint-disable no-unused-vars */
+import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 
 const MyAppointments = () => {
   const [user, loading, error] = useAuthState(auth);
   const [myAppointments, setMyAppointments] = useState([]);
-  console.log(user.email);
+  const navigate = useNavigate()
   useEffect(() => {
-    fetch(`http://localhost:5000/booking?patientEmail=${user.email}`)
-      .then((res) => res.json())
-      .then((data) => setMyAppointments(data));
+    fetch(`http://localhost:5000/booking?patientEmail=${user.email}`, {
+      method: 'GET',
+      headers: {
+        'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 401 || res.status === 403) {
+          signOut(auth);
+          localStorage.removeItem('accessToken');
+          navigate('/');
+      }
+      return res.json()
+      })
+      .then((data) => {
+        setMyAppointments(data)
+      });
   }, [user]);
   return (
     <div>
@@ -26,7 +43,7 @@ const MyAppointments = () => {
           </thead>
           <tbody>
               {
-                  myAppointments.map(a => <tr>
+                  myAppointments?.map(a => <tr>
                     <th>1</th>
                     <td>{a.treatmentName}</td>
                     <td>{a.date}</td>
