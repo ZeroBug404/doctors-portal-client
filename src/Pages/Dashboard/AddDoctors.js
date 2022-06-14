@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
@@ -11,7 +10,7 @@ const AddDoctors = () => {
     reset
   } = useForm();
 
-  const {data: appointments, isLoading} = useQuery('appointments', () => fetch(`http://localhost:5000/appointment`).then(res => res.json()))
+  const {data: appointments, isLoading} = useQuery('appointments', () => fetch(`https://shielded-hollows-05722.herokuapp.com/appointment`).then(res => res.json()))
 
 
   /**
@@ -48,7 +47,7 @@ const AddDoctors = () => {
             }
 
             //send doctor to the database
-            fetch(`http://localhost:5000/doctors`, {
+            fetch(`https://shielded-hollows-05722.herokuapp.com/doctors`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',

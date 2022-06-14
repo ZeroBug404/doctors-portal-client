@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { format } from "date-fns";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
@@ -25,7 +25,7 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
       phone: e.target.phone.value
     }
 
-    fetch('http://localhost:5000/booking',{
+    fetch('https://shielded-hollows-05722.herokuapp.com/booking',{
       method: 'POST',
       headers: {
         'content-type': 'application/json'

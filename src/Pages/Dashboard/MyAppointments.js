@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { signOut } from "firebase/auth";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
@@ -10,7 +10,7 @@ const MyAppointments = () => {
   const [myAppointments, setMyAppointments] = useState([]);
   const navigate = useNavigate()
   useEffect(() => {
-    fetch(`http://localhost:5000/booking?patientEmail=${user.email}`, {
+    fetch(`https://shielded-hollows-05722.herokuapp.com/booking?patientEmail=${user.email}`, {
       method: 'GET',
       headers: {
         'authorization': `Bearer ${localStorage.getItem('accessToken')}`

@@ -1,10 +1,12 @@
-import React from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
+import DeleteConfirmModal from "./DeleteConfirmModal";
 import DoctorsRow from "./DoctorsRow";
 
 const ManageDoctors = () => {
+  const [deleteConfirm, setDeleteConfirm] = useState(null)
   const { data: doctors, isLoading, refetch } = useQuery("doctors", () =>
-    fetch(`http://localhost:5000/doctors`, {
+    fetch(`https://shielded-hollows-05722.herokuapp.com/doctors`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -12,7 +14,6 @@ const ManageDoctors = () => {
     }).then((res) => res.json())
   );
 
-  console.log(doctors);
 
   if (isLoading) {
     return (
@@ -37,16 +38,22 @@ const ManageDoctors = () => {
           </thead>
           <tbody>
             {
-                doctors.map((doctor, index) => <DoctorsRow 
+                doctors?.map((doctor, index) => <DoctorsRow 
                     key={doctor._id}
                     doctor={doctor}
                     index={index}
                     refetch={refetch}
+                    setDeleteConfirm={setDeleteConfirm}
                     ></DoctorsRow>)
             }
           </tbody>
         </table>
       </div>
+      {deleteConfirm && <DeleteConfirmModal 
+      deleteConfirm={deleteConfirm}
+      refetch={refetch}
+      setDeleteConfirm={setDeleteConfirm}
+      ></DeleteConfirmModal>}
     </div>
   );
 };

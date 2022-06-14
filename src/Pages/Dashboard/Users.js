@@ -1,4 +1,3 @@
-import React from "react";
 import { useQuery } from "react-query";
 import UserRow from "./UserRow";
 
@@ -8,7 +7,7 @@ const Users = () => {
     isLoading,
     refetch,
   } = useQuery("users", () =>
-    fetch(`http://localhost:5000/users`, {
+    fetch(`https://shielded-hollows-05722.herokuapp.com/users`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

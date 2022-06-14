@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import Appointmentinfo from "./Appointmentinfo";
 import BookingModal from "./BookingModal";
@@ -11,7 +11,7 @@ const AvilableAppointments = ({ date }) => {
   const formattedDate = format(date, "PP");
 
   const { data: appointments, isLoading, refetch } = useQuery(["available", formattedDate], () =>
-    fetch(`http://localhost:5000/available?date=${formattedDate}`).then((res) =>
+    fetch(`https://shielded-hollows-05722.herokuapp.com/available?date=${formattedDate}`).then((res) =>
       res.json()
     )
   );
@@ -24,7 +24,7 @@ const AvilableAppointments = ({ date }) => {
     );
   }
   // useEffect(() => {
-  //     fetch(`http://localhost:5000/available?date=${formattedDate}`)
+  //     fetch(`https://shielded-hollows-05722.herokuapp.com/available?date=${formattedDate}`)
   //     .then(res => res.json())
   //     .then(data => setAppointments(data))
   // },[formattedDate])
