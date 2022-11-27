@@ -1,24 +1,24 @@
 import { toast } from "react-toastify";
 
-const DeleteConfirmModal = ({deleteConfirm, setDeleteConfirm, refetch}) => {
-    const {name, email} = deleteConfirm;
+const DeleteConfirmModal = ({ deleteConfirm, setDeleteConfirm, refetch }) => {
+  const { name, email } = deleteConfirm;
 
-    const handleDelete = () => {
-        fetch(`https://shielded-hollows-05722.herokuapp.com/doctors/${email}`, {
-            method: 'DELETE',
-            headers: {
-              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            if(data.deletedCount){
-                toast.success(`Doctor: ${name} deleted`);
-                refetch();
-                setDeleteConfirm(null)
-            }
-        })
-    }
+  const handleDelete = () => {
+    fetch(`https://doctors-portal-server-bj24.onrender.com/doctors/${email}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount) {
+          toast.success(`Doctor: ${name} deleted`);
+          refetch();
+          setDeleteConfirm(null);
+        }
+      });
+  };
   return (
     <div>
       <input type="checkbox" id="delete-confirm-modal" class="modal-toggle" />
@@ -32,7 +32,12 @@ const DeleteConfirmModal = ({deleteConfirm, setDeleteConfirm, refetch}) => {
             use Wikipedia for free!
           </p>
           <div class="modal-action">
-          <button onClick={handleDelete} class="btn btn-xs btn-outline btn-error">delete</button>
+            <button
+              onClick={handleDelete}
+              class="btn btn-xs btn-outline btn-error"
+            >
+              delete
+            </button>
             <label for="delete-confirm-modal" class="btn btn-xs btn-outline">
               Cancel
             </label>

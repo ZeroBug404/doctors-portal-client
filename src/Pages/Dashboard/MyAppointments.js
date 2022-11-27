@@ -10,7 +10,7 @@ const MyAppointments = () => {
   const [myAppointments, setMyAppointments] = useState([]);
   const navigate = useNavigate()
   useEffect(() => {
-    fetch(`https://shielded-hollows-05722.herokuapp.com/booking?patientEmail=${user.email}`, {
+    fetch(`https://doctors-portal-server-bj24.onrender.com/booking?patientEmail=${user.email}`, {
       method: 'GET',
       headers: {
         'authorization': `Bearer ${localStorage.getItem('accessToken')}`

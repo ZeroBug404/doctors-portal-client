@@ -6,7 +6,7 @@ import DoctorsRow from "./DoctorsRow";
 const ManageDoctors = () => {
   const [deleteConfirm, setDeleteConfirm] = useState(null)
   const { data: doctors, isLoading, refetch } = useQuery("doctors", () =>
-    fetch(`https://shielded-hollows-05722.herokuapp.com/doctors`, {
+    fetch(`https://doctors-portal-server-bj24.onrender.com/doctors`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

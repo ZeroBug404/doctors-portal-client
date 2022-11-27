@@ -25,7 +25,7 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
       phone: e.target.phone.value
     }
 
-    fetch('https://shielded-hollows-05722.herokuapp.com/booking',{
+    fetch('https://doctors-portal-server-bj24.onrender.com/booking',{
       method: 'POST',
       headers: {
         'content-type': 'application/json'

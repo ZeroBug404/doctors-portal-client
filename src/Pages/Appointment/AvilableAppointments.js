@@ -11,7 +11,7 @@ const AvilableAppointments = ({ date }) => {
   const formattedDate = format(date, "PP");
 
   const { data: appointments, isLoading, refetch } = useQuery(["available", formattedDate], () =>
-    fetch(`https://shielded-hollows-05722.herokuapp.com/available?date=${formattedDate}`).then((res) =>
+    fetch(`https://doctors-portal-server-bj24.onrender.com/available?date=${formattedDate}`).then((res) =>
       res.json()
     )
   );
@@ -24,7 +24,7 @@ const AvilableAppointments = ({ date }) => {
     );
   }
   // useEffect(() => {
-  //     fetch(`https://shielded-hollows-05722.herokuapp.com/available?date=${formattedDate}`)
+  //     fetch(`https://doctors-portal-server-bj24.onrender.com/available?date=${formattedDate}`)
   //     .then(res => res.json())
   //     .then(data => setAppointments(data))
   // },[formattedDate])

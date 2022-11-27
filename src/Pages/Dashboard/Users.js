@@ -7,7 +7,7 @@ const Users = () => {
     isLoading,
     refetch,
   } = useQuery("users", () =>
-    fetch(`https://shielded-hollows-05722.herokuapp.com/users`, {
+    fetch(`https://doctors-portal-server-bj24.onrender.com/users`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

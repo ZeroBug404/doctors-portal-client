@@ -10,7 +10,7 @@ const AddDoctors = () => {
     reset
   } = useForm();
 
-  const {data: appointments, isLoading} = useQuery('appointments', () => fetch(`https://shielded-hollows-05722.herokuapp.com/appointment`).then(res => res.json()))
+  const {data: appointments, isLoading} = useQuery('appointments', () => fetch(`https://doctors-portal-server-bj24.onrender.com/appointment`).then(res => res.json()))
 
 
   /**
@@ -47,7 +47,7 @@ const AddDoctors = () => {
             }
 
             //send doctor to the database
-            fetch(`https://shielded-hollows-05722.herokuapp.com/doctors`, {
+            fetch(`https://doctors-portal-server-bj24.onrender.com/doctors`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
